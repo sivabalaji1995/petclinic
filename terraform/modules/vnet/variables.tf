@@ -30,7 +30,7 @@ variable "address_prefixes" {
 variable "service_endpoints" {
   description = "The service endpoints for the subnet."
   type        = list(string)
-  default     = ["Microsoft.ContainerService"]
+  default     = []
 } 
 
 variable "resource_group_name" {

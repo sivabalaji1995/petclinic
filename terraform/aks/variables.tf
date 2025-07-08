@@ -50,14 +50,10 @@ variable "subnet_address_prefixes" {
 variable "service_endpoints" {
   description = "The service endpoints for the subnet"
   type        = list(string)
-  default     = ["Microsoft.ContainerService"]
+  default     = []
 }
 variable "tags" {
   description = "Tags to be applied to the resources"
   type        = map(string)
-  default     = {
-    Environment = var.environment
-    CreatedBy   = var.created_by
-  }
 }
 

@@ -13,7 +13,7 @@ module "vnet" {
   subnetname          = var.subnet_name
   address_space       = var.vnet_address_space
   address_prefixes    = var.subnet_address_prefixes
-  service_endpoints   = var.service_endpoints
+  # service_endpoints   = var.service_endpoints
   location            = var.location
   resource_group_name = module.resource_group.name
   tags                = var.tags
