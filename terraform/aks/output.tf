@@ -10,3 +10,7 @@ output "subscription_id" {
   value = data.vault_kv_secret_v2.azure.data["subscription_id"]
   sensitive = true
 }
+
+
+
+
