@@ -10,16 +10,8 @@ variable "location" {
   default     = "East US" # Change to your preferred Azure region
 }
 
-variable "environment" {
-  description = "The environment tag for the resource group"
-  type        = string
-  default     = "Terraform" 
-  
-}
+variable "tags" {
+  description = "A map of tags to assign to the resources."
+  type        = map(string)
 
-variable "created_by" {
-  description = "The creator of the resource group"
-  type        = string
-  default     = "Terraform" 
-  
 }
