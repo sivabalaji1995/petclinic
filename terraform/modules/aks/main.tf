@@ -5,14 +5,14 @@ resource "azurerm_kubernetes_cluster" "aks" {
   location            = var.location
   resource_group_name = var.resource_group_name
   dns_prefix          = var.dns_prefix
-  kubernetes_version  = data.azure_kubernetes_service_versions.aks_versions.latest_version
+  kubernetes_version  = data.azurerm_kubernetes_service_versions.aks_versions.latest_version
   default_node_pool {
     name                 = "default"
-    node_count           = var.node_count
+    # node_count           = var.node_count
     vm_size              = var.vm_size
     os_disk_size_gb      = var.os_disk_size_gb
     type                 = "VirtualMachineScaleSets"
-    auto_scaling_enabled = true
+    enable_auto_scaling = true 
     min_count            = var.min_count
     max_count            = var.max_count
 
@@ -23,14 +23,15 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   oms_agent {
-    log_analytics_workspace_id = azurerm_log_analytics_workspace.insights.id
+    log_analytics_workspace_id = var.log_analytics_workspace_id
   }
 
-  azure_policy_enabled = true
+  # azure_policy_enabled = true
 
   role_based_access_control_enabled = true
 
   azure_active_directory_role_based_access_control {
+    managed = true
     admin_group_object_ids = [azuread_group.aks_administrators.object_id]
     azure_rbac_enabled     = true
   }

@@ -57,3 +57,65 @@ variable "tags" {
   type        = map(string)
 }
 
+
+## AKS Cluster
+variable "cluster_name" {
+  description = "The name of the AKS cluster"
+  type        = string
+}
+variable "dns_prefix" {
+  description = "The DNS prefix for the AKS cluster"
+  type        = string
+}
+# variable "node_count" {
+#   description = "The initial number of nodes in the AKS cluster"
+#   type        = number
+#   default     = 3
+# }
+variable "vm_size" {
+  description = "The size of the virtual machines in the AKS cluster"
+  type        = string
+  default     = "Standard_DS2_v2"
+}
+variable "os_disk_size_gb" {
+  description = "The size of the OS disk in GB for the AKS cluster nodes"
+  type        = number
+  default     = 30
+}
+variable "min_count" {
+  description = "The minimum number of nodes in the AKS cluster"
+  type        = number
+  default     = 1
+}
+variable "max_count" {
+  description = "The maximum number of nodes in the AKS cluster"
+  type        = number
+  default     = 5
+}
+variable "windows_admin_username" {
+  description = "The administrator username for Windows nodes in the AKS cluster"
+  type        = string
+  default     = "azureuser"
+}
+variable "windows_admin_password" {
+  description = "The administrator password for Windows nodes in the AKS cluster"
+  type        = string
+  sensitive   = true
+}
+
+## Log Analytics Workspace
+
+variable "workspace_name" {
+  description = "The name of the Log Analytics workspace"
+  type        = string
+  default     = "aks-log-analytics"
+  
+}
+
+variable "ad_group_name" {
+  description = "The name of the Azure AD group for AKS administrators"
+  type        = string
+  default     = "aks-administrators"
+  
+}
+
