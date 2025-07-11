@@ -26,6 +26,10 @@ jobs:
           java-version: ${{matrix.java}}
           distribution: 'adopt'
           cache: maven
+
+      - name: Make mvnw executable
+        run: chmod +x ./spring-petclinic/mvnw
+
       - name: Build with Maven Wrapper
         run: ./spring-petclinic/mvnw -B package
       
