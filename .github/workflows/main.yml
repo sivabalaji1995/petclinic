@@ -50,8 +50,12 @@ jobs:
             ls -l ./spring-petclinic/target/
             ls -l ./spring-petclinic/target/surefire-reports/
             cat ./spring-petclinic/target/surefire-reports/*.txt
-            
-          
+      - name: publish test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-jar
+          path: ./spring-petclinic/target/*.jar
+
       # - name: Make mvnw executable
       #   run: chmod +x ./spring-petclinic/mvnw
 
