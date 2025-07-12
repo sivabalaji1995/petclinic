@@ -30,8 +30,9 @@ jobs:
       - name: Make mvnw executable
         run: chmod +x ./spring-petclinic/mvnw
 
-      - name: Build with Maven Wrapper
-        run: ./spring-petclinic/mvnw -B package
+      - name: Build with Maven Wrapper 
+        working-directory: ./spring-petclinic
+        run: mvnw -B package
       
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
