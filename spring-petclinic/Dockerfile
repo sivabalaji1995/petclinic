@@ -3,7 +3,7 @@ FROM eclipse-temurin:8-jdk
 # Setting up the working directory
 WORKDIR /app
 
-COPY target/*.jar spring-petclinic.jar
+COPY *.jar spring-petclinic.jar
 
 # Exposing the port on which the application will run
 EXPOSE 8080
