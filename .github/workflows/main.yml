@@ -37,8 +37,11 @@ jobs:
           cache: maven
 
       - name: installing maven
-        run: sudo apt-get install maven
-
+        run: |
+            sudo apt-get update
+            sudo apt-get install -y maven
+            mvn --version 
+             
       # - name: Make mvnw executable
       #   run: chmod +x ./spring-petclinic/mvnw
 
