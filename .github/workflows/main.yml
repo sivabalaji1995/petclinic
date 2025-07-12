@@ -36,6 +36,9 @@ jobs:
           distribution: 'adopt'
           cache: maven
 
+      - name: installing maven
+        run: sudo apt-get install maven
+
       # - name: Make mvnw executable
       #   run: chmod +x ./spring-petclinic/mvnw
 
