@@ -44,6 +44,14 @@ jobs:
       - name: build the project
         run: |
             mvn -B package --file ./spring-petclinic/pom.xml
+
+      - name: view the test file
+        run: |
+            ls -l ./spring-petclinic/target/
+            ls -l ./spring-petclinic/target/surefire-reports/
+            cat ./spring-petclinic/target/surefire-reports/*.txt
+            
+          
       # - name: Make mvnw executable
       #   run: chmod +x ./spring-petclinic/mvnw
 
