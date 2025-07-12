@@ -78,6 +78,13 @@ jobs:
         with:
           ref: main
 
+      - name: Generate short Git SHA
+        run: echo GITSHA=$(git rev-parse --short HEAD) >> $GITHUB_ENV
+
+      - name: Print Git SHA
+        run: |
+          echo "Git SHA: ${{ env.GITSHA }}"
+
       # - name : download the artifact
       #   uses: actions/download-artifact@v4
       #   with:
