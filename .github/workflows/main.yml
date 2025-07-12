@@ -9,9 +9,17 @@ on:
   # pull_request:
   #   branches: [ main ]
   workflow_dispatch:
-  # push:
-  #   branches: [ main ]
-
+    inputs: 
+      stages:
+        description: 'Select the stages to run'
+        required: true
+        default: 'build,Docker'
+        type: choice
+        options:
+          - build
+          - Docker
+          - build,Docker
+  
 
 jobs:
   build:
