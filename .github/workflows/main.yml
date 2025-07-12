@@ -27,14 +27,14 @@ jobs:
 
       - name : checking the current folder
         run: pwd && ls -l
-        
 
-      # - name: Set up JDK ${{matrix.java}}
-      #   uses: actions/setup-java@v4
-      #   with:
-      #     java-version: ${{matrix.java}}
-      #     distribution: 'adopt'
-      #     cache: maven
+
+      - name: Set up JDK ${{matrix.java}}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{matrix.java}}
+          distribution: 'adopt'
+          cache: maven
 
       # - name: Make mvnw executable
       #   run: chmod +x ./spring-petclinic/mvnw
