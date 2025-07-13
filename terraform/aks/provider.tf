@@ -37,17 +37,17 @@ data "vault_kv_secret_v2" "azure" {
 # This provider block is used to authenticate with Azure using the provided credentials.
 provider "azurerm" {
   features {}
-  client_id       = data.vault_kv_secret_v2.azure.data["client_id"]
-  tenant_id       = data.vault_kv_secret_v2.azure.data["tenant_id"]
-  subscription_id = data.vault_kv_secret_v2.azure.data["subscription_id"]
-  # The client_secret is not set here as it is sensitive and should be handled securely.
-  client_secret = data.vault_kv_secret_v2.azure.data["client_secret"]
-}
-
-provider "azuread" {
   # client_id       = data.vault_kv_secret_v2.azure.data["client_id"]
-  tenant_id       = data.vault_kv_secret_v2.azure.data["tenant_id"]
+  # tenant_id       = data.vault_kv_secret_v2.azure.data["tenant_id"]
   # subscription_id = data.vault_kv_secret_v2.azure.data["subscription_id"]
   # # The client_secret is not set here as it is sensitive and should be handled securely.
   # client_secret = data.vault_kv_secret_v2.azure.data["client_secret"]
+}
+
+provider "azuread" {
+  # # client_id       = data.vault_kv_secret_v2.azure.data["client_id"]
+  # tenant_id       = data.vault_kv_secret_v2.azure.data["tenant_id"]
+  # # subscription_id = data.vault_kv_secret_v2.azure.data["subscription_id"]
+  # # # The client_secret is not set here as it is sensitive and should be handled securely.
+  # # client_secret = data.vault_kv_secret_v2.azure.data["client_secret"]
 }
