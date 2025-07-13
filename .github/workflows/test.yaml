@@ -23,6 +23,6 @@ jobs:
       - name: Deploy to Azure kubernetes
         run: |
           az account show
-          az aks get-credentials --resource-group petclinic-rg --name petclinic-aks
+          az aks get-credentials --resource-group aksrg --name myaks-cluster
           kubectl get nodes
           kubectl get pods
