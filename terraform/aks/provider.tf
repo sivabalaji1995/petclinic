@@ -42,16 +42,16 @@ provider "azurerm" {
   # subscription_id = data.vault_kv_secret_v2.azure.data["subscription_id"]
   # # The client_secret is not set here as it is sensitive and should be handled securely.
   # client_secret = data.vault_kv_secret_v2.azure.data["client_secret"]
-  client_id       = var.client_id
-  tenant_id       = var.tenant_id
-  subscription_id = var.subscription_id
-  # The client_secret is not set here as it is sensitive and should be handled securely.
-  client_secret = var.client_secret
+  # client_id       = var.client_id
+  # tenant_id       = var.tenant_id
+  # subscription_id = var.subscription_id
+  # # The client_secret is not set here as it is sensitive and should be handled securely.
+  # client_secret   = var.client_secret
 }
 
 provider "azuread" {
   # # client_id       = data.vault_kv_secret_v2.azure.data["client_id"]
-  tenant_id       = var.tenant_id
+  # tenant_id       = var.tenant_id
   # # subscription_id = data.vault_kv_secret_v2.azure.data["subscription_id"]
   # # # The client_secret is not set here as it is sensitive and should be handled securely.
   # # client_secret = data.vault_kv_secret_v2.azure.data["client_secret"]

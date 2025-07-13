@@ -2,24 +2,24 @@ variable "vault_addr" {
   default = "http://127.0.0.1:8200"
 }
 
-variable "client_id" {
-  description = "The client ID for Azure authentication"
-  type        = string  
+# variable "client_id" {
+#   description = "The client ID for Azure authentication"
+#   type        = string  
   
-}
-variable "tenant_id" {
-  description = "The tenant ID for Azure authentication"
-  type        = string
-}
-variable "subscription_id" {
-  description = "The subscription ID for Azure authentication"
-  type        = string
-}
-variable "client_secret" {
-  description = "The client secret for Azure authentication"
-  type        = string
-  sensitive   = true
-}
+# }
+# variable "tenant_id" {
+#   description = "The tenant ID for Azure authentication"
+#   type        = string
+# }
+# variable "subscription_id" {
+#   description = "The subscription ID for Azure authentication"
+#   type        = string
+# }
+# variable "client_secret" {
+#   description = "The client secret for Azure authentication"
+#   type        = string
+#   sensitive   = true
+# }
 
 variable "resource_group_name" {
   description = "The name of the resource group where the AKS cluster will be created"
