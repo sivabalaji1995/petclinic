@@ -31,5 +31,9 @@ jobs:
           az account show
           az aks get-credentials --resource-group aksrg --name myaks-cluster
           cat /home/runner/.kube/config
-          kubectl get nodes
-          # kubectl get pods
+          kubelogin convert-kubeconfig -l workloadidentity
+          cat /home/runner/.kube/config
+                     
+           
+   
+
