@@ -19,7 +19,10 @@ jobs:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}  
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          
+
       - name: Deploy to Azure kubernetes
         run: |
           az account show
+          az aks get-credentials --resource-group petclinic-rg --name petclinic-aks
+          kubectl get nodes
+          kubectl get pods
