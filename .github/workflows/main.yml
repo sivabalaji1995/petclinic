@@ -18,10 +18,10 @@ on:
     #     options:
     #       - build
     #       - Docker
-    #       - all
-  push:
-    branches:
-      - main
+  #   #       - all
+  # push:
+  #   branches:
+  #     - main
 
 permissions:
       contents: read
