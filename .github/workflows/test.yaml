@@ -33,6 +33,8 @@ jobs:
           cat /home/runner/.kube/config
           kubelogin convert-kubeconfig -l workloadidentity
           cat /home/runner/.kube/config
+          kubectl get nodes
+          kubectl get pods --all-namespaces
                      
            
    
