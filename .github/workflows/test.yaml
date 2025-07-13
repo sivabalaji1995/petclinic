@@ -3,6 +3,11 @@ name: Testing the azure connection
 on: 
   workflow_dispatch:
   
+
+permissions:
+      contents: read
+      id-token: write
+      
 jobs:
   test-azure-connection:
     runs-on: ubuntu-latest
