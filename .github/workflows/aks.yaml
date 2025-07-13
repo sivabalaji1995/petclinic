@@ -1,0 +1,41 @@
+name: Deploying to Azure Kubernetes Service
+
+on: 
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - main
+
+permissions:
+      contents: read
+      id-token: write
+
+jobs:
+  Terraform_plan:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: azure login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}  
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.0.0
+
+      - name: Terraform Init
+        run: |
+          cd terraform/aks/
+          terraform init
+
+      - name: Terraform Plan
+        run: |
+           cd terraform/aks/
+           terraform plan
