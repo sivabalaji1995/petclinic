@@ -34,10 +34,7 @@ jobs:
           # kubelogin convert-kubeconfig -l workloadidentity --client-id "${{ secrets.AZURE_CLIENT_ID }}" --tenant-id "${{ secrets.AZURE_TENANT_ID }}" 
            kubelogin convert-kubeconfig -l azurecli
           cat /home/runner/.kube/config
-          kubectl get nodes
-          kubectl get pods --all-namespaces
-          kubectl apply -f ./spring-petclinic/manifests/
-          kubectl get all
+          ls -l ./spring-petclinic/manifests/
                      
            
    
