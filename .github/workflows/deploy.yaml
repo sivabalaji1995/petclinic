@@ -1,4 +1,4 @@
-name: Testing the azure connection
+name: Deploying on the AKS
 
 on: 
   workflow_dispatch:
