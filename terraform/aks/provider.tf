@@ -1,10 +1,10 @@
 terraform {
   required_providers {
 
-    vault = {
-      source  = "hashicorp/vault"
-      version = "~> 3.0"
-    }
+    # vault = {
+    #   source  = "hashicorp/vault"
+    #   version = "~> 3.0"
+    # }
     azurerm = {
       source  = "hashicorp/azurerm"
       version = "~> 3.0"
@@ -29,10 +29,10 @@ terraform {
 #   address = "http://localhost:8200"
 # }
 
-data "vault_kv_secret_v2" "azure" {
-  mount = "secret"
-  name  = "azure"
-}
+# data "vault_kv_secret_v2" "azure" {
+#   mount = "secret"
+#   name  = "azure"
+# }
 # Provider configuration for Azure
 # This provider block is used to authenticate with Azure using the provided credentials.
 provider "azurerm" {
