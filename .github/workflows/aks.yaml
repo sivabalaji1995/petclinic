@@ -1,4 +1,4 @@
-name: Deploying to Azure Kubernetes Service
+name: Provisioning AKS via Terraform
 
 on: 
   workflow_dispatch:
