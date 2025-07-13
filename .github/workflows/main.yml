@@ -108,7 +108,7 @@ jobs:
   Docker: 
     # if : ${{github.event.inputs.stages == 'Docker' || github.event.inputs.stages == 'all'}}
     runs-on: ubuntu-latest
-    needs: build
+    needs: sonar
     steps:
       - uses: actions/checkout@v4
         with:
