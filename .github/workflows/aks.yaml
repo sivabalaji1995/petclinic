@@ -2,6 +2,18 @@ name: Provisioning AKS via Terraform
 
 on: 
   workflow_dispatch:
+    inputs: 
+      stages:
+        description: 'Select the stages to run'
+        required: true
+        default: all
+        type: choice
+        options:
+          - plan
+          - apply
+          - destroy
+          - all
+        
   # push:
   #   branches:
   #     - main
@@ -13,6 +25,7 @@ permissions:
 jobs:
   Terraform_plan:
     runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.stages == 'plan' || github.event.inputs.stages == 'all' }}
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
@@ -49,7 +62,8 @@ jobs:
 
   Terraform_apply:
     runs-on: ubuntu-latest
-    needs: Terraform_plan
+    if: ${{ github.event.inputs.stages == 'apply' || github.event.inputs.stages == 'all' }}
+    # needs: Terraform_plan
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
@@ -82,3 +96,40 @@ jobs:
         run: |
           cd terraform/aks/
           terraform apply -auto-approve
+
+  Terraform_destroy:
+    runs-on: ubuntu-latest
+    # needs: Terraform_apply
+    if: ${{ github.event.inputs.stages == 'destroy' || github.event.inputs.stages == 'all' }}
+    env:
+      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    steps:
+      - name: azure login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}  
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.12.2
+
+      - name: Terraform Init
+        run: |
+          cd terraform/aks/
+          terraform init
+
+      - name: Terraform Destroy
+        run: |
+          cd terraform/aks/
+          terraform destroy -auto-approve
