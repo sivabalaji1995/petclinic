@@ -18,6 +18,6 @@ spec:
         - name: regcred
       containers:
         - name: petclinic
-          image: balaji36490/petclinic:5ecb971
+          image: balaji36490/petclinic:4f2d4bb
           ports:
             - containerPort: 8080
