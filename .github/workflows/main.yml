@@ -88,6 +88,30 @@ jobs:
           cd spring-petclinic
            mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=petclinic -Dsonar.projectName='petclinic'
 
+      - name: Wait for SonarQube Quality Gate result
+        run: |
+          echo "Waiting for analysis to complete..."
+          sleep 10
+
+          analysis_id=$(curl -s -u "${{ secrets.SONAR_TOKEN }}:" \
+            "${{ secrets.SONAR_HOST_URL }}/api/project_analyses/search?project=petclinic" | \
+            jq -r '.analyses[0].analysisId')
+
+          echo "Analysis ID: $analysis_id"
+
+          status=$(curl -s -u "${{ secrets.SONAR_TOKEN }}:" \
+            "${{ secrets.SONAR_HOST_URL }}/api/qualitygates/project_status?analysisId=$analysis_id" | \
+            jq -r '.projectStatus.status')
+
+          echo "Quality Gate Status: $status"
+
+          if [[ "$status" != "OK" ]]; then
+            echo "Quality Gate failed. Failing the pipeline."
+            exit 1
+          else
+            echo "Quality Gate passed."
+          fi
+
 
       - name: publish artifact
         uses: actions/upload-artifact@v4
@@ -95,35 +119,35 @@ jobs:
           name: app-jar
           path: ./spring-petclinic/target/*.jar
 
-  sonar:
-    # if : ${{github.event.inputs.stages == 'sonar' || github.event.inputs.stages == 'all'}}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: main
+  # sonar:
+  #   # if : ${{github.event.inputs.stages == 'sonar' || github.event.inputs.stages == 'all'}}
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         ref: main
 
-      - name: Set up Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: temurin
-          java-version: '17'
+  #     - name: Set up Java
+  #       uses: actions/setup-java@v3
+  #       with:
+  #         distribution: temurin
+  #         java-version: '17'
 
-      - name: Cache Sonar packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
+  #     - name: Cache Sonar packages
+  #       uses: actions/cache@v3
+  #       with:
+  #         path: ~/.sonar/cache
+  #         key: ${{ runner.os }}-sonar
+  #         restore-keys: ${{ runner.os }}-sonar
 
-      - name: Build and analyze
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: |
-          cd spring-petclinic
-           mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=petclinic -Dsonar.projectName='petclinic'
+  #     - name: Build and analyze
+  #       env:
+  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  #         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+  #       run: |
+  #         cd spring-petclinic
+  #          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=petclinic -Dsonar.projectName='petclinic'
  
   Docker: 
     # if : ${{github.event.inputs.stages == 'Docker' || github.event.inputs.stages == 'all'}}
