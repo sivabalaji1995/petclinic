@@ -1,0 +1,11 @@
+[Unit]
+Description=Restart Docker container after reboot
+After=network.target docker.service
+Requires=docker.service
+
+[Service]
+ExecStart=/usr/local/bin/restart-container.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
