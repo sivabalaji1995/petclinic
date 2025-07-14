@@ -88,29 +88,29 @@ jobs:
           cd spring-petclinic
            mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=petclinic -Dsonar.projectName='petclinic'
 
-      # - name: Wait for SonarQube Quality Gate result
-      #   run: |
-      #     echo "Waiting for analysis to complete..."
-      #     sleep 10
+      - name: Wait for SonarQube Quality Gate result
+        run: |
+          echo "Waiting for analysis to complete..."
+          sleep 10
 
-      #     analysis_id=$(curl -s -u "${{ secrets.SONAR_TOKEN }}:" \
-      #       "${{ secrets.SONAR_HOST_URL }}/api/project_analyses/search?project=petclinic" | \
-      #       jq -r '.analyses[0].key')
+          analysis_id=$(curl -s -u "${{ secrets.SONAR_TOKEN }}:" \
+            "${{ secrets.SONAR_HOST_URL }}/api/project_analyses/search?project=petclinic" | \
+            jq -r '.analyses[0].key')
 
-      #     echo "Analysis ID: $analysis_id"
+          echo "Analysis ID: $analysis_id"
 
-      #     status=$(curl -s -u "${{ secrets.SONAR_TOKEN }}:" \
-      #       "${{ secrets.SONAR_HOST_URL }}/api/qualitygates/project_status?analysisId=$analysis_id" | \
-      #       jq -r '.projectStatus.status')
+          status=$(curl -s -u "${{ secrets.SONAR_TOKEN }}:" \
+            "${{ secrets.SONAR_HOST_URL }}/api/qualitygates/project_status?projectKey=petclinic" | \
+            jq -r '.projectStatus.status')
 
-      #     echo "Quality Gate Status: $status"
+          echo "Quality Gate Status: $status"
 
-      #     if [[ "$status" != "OK" ]]; then
-      #       echo "Quality Gate failed. Failing the pipeline."
-      #       exit 1
-      #     else
-      #       echo "Quality Gate passed."
-      #     fi
+          if [[ "$status" != "OK" ]]; then
+            echo "Quality Gate failed. Failing the pipeline."
+            exit 1
+          else
+            echo "Quality Gate passed."
+          fi
 
 
       - name: publish artifact
