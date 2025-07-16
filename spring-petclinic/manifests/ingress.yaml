@@ -5,6 +5,8 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: azure/application-gateway  
 spec:
+  tls:
+    - secretName: petclinic
   # ingressClassName: azure-application-gateway
   rules:
     - http:
@@ -16,24 +18,4 @@ spec:
                 name: petclinic
                 port:
                   number: 8080
-          - path: /vets.html
-            pathType: Exact
-            backend:
-              service:
-                name: petclinic
-                port:
-                  number: 8080
-          - path: /owners
-            pathType: Exact
-            backend:
-              service:
-                name: petclinic
-                port:
-                  number: 8080
-          - path: /oups
-            pathType: Exact
-            backend:
-              service:
-                name: petclinic
-                port:
-                  number: 8080
+          
