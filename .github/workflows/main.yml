@@ -190,6 +190,10 @@ jobs:
     runs-on: self-hosted
     needs: Docker
     steps:
+
+      - name: Set up Azure CLI
+        uses: azure/setup-azcli@v1
+        
       - name: azure login
         uses: azure/login@v1
         with:
