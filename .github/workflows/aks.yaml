@@ -24,7 +24,7 @@ permissions:
 
 jobs:
   Terraform_plan:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     if: ${{ github.event.inputs.stages == 'plan' || github.event.inputs.stages == 'all' }}
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
@@ -61,7 +61,7 @@ jobs:
 
 
   Terraform_apply:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     if: ${{ github.event.inputs.stages == 'apply' || github.event.inputs.stages == 'all' }}
     # needs: Terraform_plan
     env:
@@ -98,7 +98,7 @@ jobs:
           terraform apply -auto-approve
 
   Terraform_destroy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     # needs: Terraform_apply
     if: ${{ github.event.inputs.stages == 'destroy' || github.event.inputs.stages == 'all' }}
     env:
