@@ -9,6 +9,7 @@ spec:
     - secretName: petclinic
   # ingressClassName: azure-application-gateway
   rules:
+    # - host: pet.petclinic.com
     - http:
         paths:
           - path: /
