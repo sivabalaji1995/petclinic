@@ -31,7 +31,7 @@ jobs:
   build:
     # if : ${{github.event.inputs.stages == 'build' || github.event.inputs.stages == 'all'}}
 
-    runs-on: self-hosted
+    runs-on: [java]
     strategy:
       matrix:
         java: [ '17' ]
@@ -151,7 +151,7 @@ jobs:
  
   Docker: 
     # if : ${{github.event.inputs.stages == 'Docker' || github.event.inputs.stages == 'all'}}
-    runs-on: self-hosted
+    runs-on: [java]
     needs: build
     steps:
       - uses: actions/checkout@v4
@@ -187,7 +187,7 @@ jobs:
 
   deploy:
     # if : ${{github.event.inputs.stages == 'deploy' || github.event.inputs.stages == 'all'}}
-    runs-on: self-hosted
+    runs-on: [java]
     needs: Docker
     steps:
 
