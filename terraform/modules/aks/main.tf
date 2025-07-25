@@ -32,7 +32,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   workload_identity_enabled   = true
 
   key_vault_secrets_provider {
-    enabled                 = true
+   
     secret_rotation_enabled = true  # Optional: rotates secrets automatically
   }
   
